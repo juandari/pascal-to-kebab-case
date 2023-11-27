@@ -1,0 +1,19 @@
+{
+  "name": "pascal-to-kebab",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "install": "chmod u+x index.js"
+  },
+  "bin": {
+    "pascal-to-kebab": "./index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "commander": "^11.1.0"
+  }
+}
