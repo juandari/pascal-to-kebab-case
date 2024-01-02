@@ -5,7 +5,10 @@ const path = require('path');
 const { Command } = require('commander');
 
 const pascalToKebab = (str) => {
-  const result = str.replace('PDP', 'pdp');
+  let result = str;
+  if (result.includes('PDP')) {
+    result = result.replace('PDP', 'pdp-');
+  }
   return result.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase();
 };
 
@@ -16,8 +19,6 @@ const renamePascalToKebab = (dir) => {
     const filePath = path.join(dir, file);
     const stats = fs.statSync(filePath);
     let kebabName = pascalToKebab(file);
-
-    if (kebabName.includes('pdp')) kebabName = kebabName.replace('pdp', 'pdp-');
 
     if (stats.isDirectory()) {
       const kebabPath = path.join(dir, kebabName);
@@ -33,12 +34,18 @@ const renamePascalToKebab = (dir) => {
       ) {
         fs.renameSync(
           filePath,
-          path.join(dir, dirArray[dirArray.length - 1] + '.' + kebabName)
+          path.join(
+            dir,
+            pascalToKebab(dirArray[dirArray.length - 1]) + '.' + kebabName
+          )
         );
       } else if (kebabName === 'loader.tsx') {
         fs.renameSync(
           filePath,
-          path.join(dir, dirArray[dirArray.length - 1] + '-' + kebabName)
+          path.join(
+            dir,
+            pascalToKebab(dirArray[dirArray.length - 1]) + '-' + kebabName
+          )
         );
       } else {
         fs.renameSync(filePath, path.join(dir, kebabName));
