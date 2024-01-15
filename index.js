@@ -30,7 +30,7 @@ const renamePascalToKebab = (dir) => {
       if (
         kebabName === 'styles.ts' ||
         kebabName === 'types.ts' ||
-        kebabName === 'loadable.ts'
+        kebabName === 'loadable.tsx'
       ) {
         fs.renameSync(
           filePath,
